@@ -37,6 +37,7 @@ public class DraftPage extends BasePage {
         log.info("User sees the email in the list");
         return wait.until(ExpectedConditions.visibilityOf(emailTopic))
                 .isDisplayed();
+
     }
 
     public void openTheMail() {
