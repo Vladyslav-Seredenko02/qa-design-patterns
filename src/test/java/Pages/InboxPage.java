@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import Tests.TestData;
 
+
 public class InboxPage extends BasePage {
     private static final Logger log = LogManager.getLogger(InboxPage.class);
 
@@ -18,9 +19,7 @@ public class InboxPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-
-    @FindBy(xpath = "//input[@placeholder='Пошук у пошті']")
-    private WebElement confirmingInboxElement;
+    private final String pageURL = "https://mail.ukr.net/desktop/u0/msglist/inbox";
 
     @FindBy(xpath = "//button[@type='button' and contains(text(), 'Написати листа')]")
     private WebElement createMessageBtn;
@@ -31,7 +30,7 @@ public class InboxPage extends BasePage {
     @FindBy(id = "compose-subject")
     private WebElement topicField;
 
-    @FindBy(id = "tinymce")
+    @FindBy(css = "iframe[id$='_ifr']")
     private WebElement emailBodyInputField;
 
     @FindBy(xpath = "//span[contains(text(), 'Чернетки')]")
@@ -42,9 +41,10 @@ public class InboxPage extends BasePage {
 
 
     public boolean IsOnInboxPage() {
-        log.info("User is on the Inbox page");
-        return wait.until(ExpectedConditions.visibilityOf(confirmingInboxElement))
-                .isDisplayed();
+        wait.until(ExpectedConditions.urlContains(pageURL));
+        String currentURL = driver.getCurrentUrl();
+        log.info("User is on the Inbox page, Current URL: {}", driver.getCurrentUrl());
+        return currentURL != null && currentURL.equals(pageURL);
     }
 
     public void createMessage() {
@@ -54,15 +54,12 @@ public class InboxPage extends BasePage {
 
     public void fillEmailForm() {
         log.info("User fills email form — to: {}, subject: {}", TestData.RECIPIENT, TestData.SUBJECT);
-        wait.until(ExpectedConditions.visibilityOf(addresseeField))
-                .sendKeys(TestData.RECIPIENT);
+        enterText(addresseeField, TestData.RECIPIENT);
         addresseeField.sendKeys(Keys.ENTER);
+        enterText(topicField, TestData.SUBJECT);
 
-        wait.until(ExpectedConditions.visibilityOf(topicField))
-                .sendKeys(TestData.SUBJECT);
-        driver.switchTo().frame("mce_0_ifr");
+        wait.until(ExpectedConditions.visibilityOf(emailBodyInputField)).click();
         emailBodyInputField.sendKeys(TestData.BODY);
-        driver.switchTo().defaultContent();
         log.info("User successfully filled the email form");
     }
 

@@ -37,14 +37,12 @@ public class LoginPage extends BasePage {
 
     public void enterUsername() {
         log.info("User enters username: {}", USERNAME);
-        wait.until(ExpectedConditions.visibilityOf(loginField))
-                .sendKeys(USERNAME);
+        enterText(loginField,USERNAME);
     }
 
     public void enterPassword() {
         log.info("User enters password: {}", PASSWORD);
-        wait.until(ExpectedConditions.visibilityOf(passwordField))
-                .sendKeys(PASSWORD);
+        enterText(passwordField,PASSWORD);
     }
     public void clickLoginBtn() {
         log.info("User clicks the login button");

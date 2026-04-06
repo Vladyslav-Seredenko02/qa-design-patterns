@@ -61,7 +61,7 @@ public class DraftPage extends BasePage {
 
     public String getMailBodyInputText() {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(
-                By.xpath("//iframe[contains(@id,'_ifr')]")));
+                By.cssSelector("iframe[id$='_ifr']")));
         String actual = driver.findElement(By.id("tinymce")).getText();
         driver.switchTo().defaultContent();
         log.info("User sees email body: {}", actual);
