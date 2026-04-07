@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+
 public class UkrnetEMailTest extends BaseTest {
     private static final Logger log = LogManager.getLogger(UkrnetEMailTest.class);
 
@@ -15,7 +16,9 @@ public class UkrnetEMailTest extends BaseTest {
         loginPage.enterUsername();
         loginPage.enterPassword();
         loginPage.clickLoginBtn();
-        Assert.assertTrue(inboxPage.IsOnInboxPage(), "Login wasn`t successful");
+        inboxPage.waitTillPageLoaded(inboxPage.getInboxPageUrl());
+        Assert.assertEquals(inboxPage.getCurrentUrl(), inboxPage.getInboxPageUrl()
+                , "Login was`t successful - urls were`t matching");
         log.info("=== loginTest passed successfully ===");
     }
 
@@ -28,13 +31,13 @@ public class UkrnetEMailTest extends BaseTest {
         Assert.assertTrue(draftPage.mailIsDisplayed(), "Mail isn`t displayed on the draft page");
         draftPage.openTheMail();
         Assert.assertEquals(draftPage.getAddresseeText(), TestData.RECIPIENT
-                , "Addressee doesn`t match the expected recipient");
+                , "Addressee does`t match the expected recipient");
 
         Assert.assertEquals(draftPage.getEmailTopicText(), TestData.SUBJECT
-                , "Topic doesn`t match the expected subject");
+                , "Topic does`t match the expected subject");
 
         Assert.assertEquals(draftPage.getMailBodyInputText(), TestData.BODY
-                , "MailBodyInput doesn`t match the expected body");
+                , "MailBodyInput does`t match the expected body");
         log.info("=== saveDraftTest passed successfully ===");
     }
 

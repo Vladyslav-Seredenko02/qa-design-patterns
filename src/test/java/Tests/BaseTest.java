@@ -1,6 +1,7 @@
 package Tests;
 
 import Drivers.DriverFactory;
+import Pages.BasePage;
 import Pages.DraftPage;
 import Pages.InboxPage;
 import Pages.LoginPage;
@@ -19,6 +20,7 @@ public class BaseTest {
     protected LoginPage loginPage;
     protected InboxPage inboxPage;
     protected DraftPage draftPage;
+    protected BasePage basePage;
 
     @Parameters("browser")
     @BeforeClass

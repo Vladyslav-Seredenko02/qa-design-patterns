@@ -40,12 +40,10 @@ public class InboxPage extends BasePage {
     private WebElement sentsTab;
 
 
-    public boolean IsOnInboxPage() {
-        wait.until(ExpectedConditions.urlContains(pageURL));
-        String currentURL = driver.getCurrentUrl();
-        log.info("User is on the Inbox page, Current URL: {}", driver.getCurrentUrl());
-        return currentURL != null && currentURL.equals(pageURL);
+    public String getInboxPageUrl() {
+        return pageURL;
     }
+
 
     public void createMessage() {
         log.info("User clicks 'Compose' button");

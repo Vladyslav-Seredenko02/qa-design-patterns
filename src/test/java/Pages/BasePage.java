@@ -23,4 +23,12 @@ public abstract class BasePage {
     protected void enterText(WebElement element, String text) {
         wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(text);
     }
+
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
+    }
+
+    public void waitTillPageLoaded(String expectedUrl) {
+        wait.until(ExpectedConditions.urlToBe(expectedUrl));
+    }
 }
