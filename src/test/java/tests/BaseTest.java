@@ -18,7 +18,7 @@ public class BaseTest {
     protected DraftPage draftPage;
 
     @Parameters("browser")
-    @BeforeClass
+    @BeforeMethod
     public void setUp(@Optional("chrome") String browser) {
         log.info("=== Starting tests on browser: {} ===", browser);
         DriverFactory.initializeDriver(browser);
@@ -26,9 +26,15 @@ public class BaseTest {
         loginPage = new LoginPage(driver);
         inboxPage = new InboxPage(driver);
         draftPage = new DraftPage(driver);
+
+        loginPage.openPage();
+        loginPage.enterUsername();
+        loginPage.enterPassword();
+        loginPage.clickLoginBtn();
+        inboxPage.waitTillPageLoaded(inboxPage.getInboxPageUrl());
     }
 
-    @AfterClass
+    @AfterMethod
     public void closeBrowser() {
         log.info("=== Closing browser ===");
         DriverFactory.tearDown();

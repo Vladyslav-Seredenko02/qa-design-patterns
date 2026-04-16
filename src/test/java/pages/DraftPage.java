@@ -30,6 +30,12 @@ public class DraftPage extends BasePage {
     @FindBy(className = "ftTyQ6mI")
     private WebElement emailTopic;
 
+    @FindBy(xpath = "(//button[text()='Видалити чернетку'])[1]")
+    private WebElement cancelBtn;
+
+    @FindBy(xpath = "(//button[text()='Підтвердити'])")
+    private WebElement confirmBtn;
+
     @FindBy(xpath = "(//button[text()='Надіслати'])[1]")
     private WebElement sendBtn;
 
@@ -66,6 +72,13 @@ public class DraftPage extends BasePage {
         driver.switchTo().defaultContent();
         log.info("User sees email body: {}", actual);
         return actual;
+    }
+
+    public void cancelTheMail() {
+        log.info("User cancels the mail composition");
+        cancelBtn.click();
+        wait.until(ExpectedConditions.elementToBeClickable(confirmBtn))
+                .click();
     }
 
     public void sendTheMail() {

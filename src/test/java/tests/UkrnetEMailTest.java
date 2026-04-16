@@ -16,11 +16,6 @@ public class UkrnetEMailTest extends BaseTest {
     @Description("User should be able to login with valid credentials")
     public void loginTest() {
         log.info("=== Test started: loginTest ===");
-        loginPage.openPage();
-        loginPage.enterUsername();
-        loginPage.enterPassword();
-        loginPage.clickLoginBtn();
-        inboxPage.waitTillPageLoaded(inboxPage.getInboxPageUrl());
         Assert.assertEquals(inboxPage.getCurrentUrl(), inboxPage.getInboxPageUrl()
                 , "Login was`t successful - urls were`t matching");
         log.info("=== loginTest passed successfully ===");
@@ -44,6 +39,7 @@ public class UkrnetEMailTest extends BaseTest {
 
         Assert.assertEquals(draftPage.getMailBodyInputText(), TestData.BODY
                 , "MailBodyInput does`t match the expected body");
+        draftPage.cancelTheMail();
         log.info("=== saveDraftTest passed successfully ===");
     }
 
@@ -52,6 +48,11 @@ public class UkrnetEMailTest extends BaseTest {
     @Description("User should be able to send email from drafts")
     public void sendMailTest() {
         log.info("=== Test started: sendMailTest ===");
+        inboxPage.createMessage();
+        inboxPage.fillEmailForm();
+        inboxPage.switchToDrafts();
+        draftPage.openTheMail();
+
         draftPage.sendTheMail();
         inboxPage.switchToDrafts();
         Assert.assertTrue(draftPage.isDraftPageClear(), "Draft page still contains the mail");

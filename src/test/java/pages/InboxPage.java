@@ -19,7 +19,11 @@ public class InboxPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    /*
+    this variable is left in this format for possible future use
+     */
     private final String pageURL = "https://mail.ukr.net/desktop/u0/msglist/inbox";
+
 
     @FindBy(xpath = "//button[@type='button' and contains(text(), 'Написати листа')]")
     private WebElement createMessageBtn;
