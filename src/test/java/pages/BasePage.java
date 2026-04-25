@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.TestConfig;
+import utils.ConfigReader;
 
 import java.time.Duration;
 
@@ -13,9 +13,9 @@ public abstract class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
-    protected final String URL = TestConfig.URL;
-    protected final String USERNAME = TestConfig.USERNAME;
-    protected final String PASSWORD = TestConfig.PASSWORD;
+    protected final String URL = ConfigReader.get("base.url");
+    protected final String USERNAME = ConfigReader.get("username");
+    protected final String PASSWORD = ConfigReader.get("password");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;

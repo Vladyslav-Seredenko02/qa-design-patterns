@@ -22,11 +22,11 @@ Applied in `BasePage` — automatically works across all Page Object classes.
 
 ### S.O.L.I.D. Fixes
 
-|      Class      |                        Problem                         | Principle |                              Solution                               |
-|:---------------:|:------------------------------------------------------:|:---------:|:-------------------------------------------------------------------:|
-| `DriverFactory` | Adding a new browser required modifying existing class |    OCP    | Extracted browser creation into separate `BrowserDriver` subclasses |
-|   `InboxPage`   |  `fillEmailForm()` was hardcoded to `TestData` class   |    DIP    |               Data is now passed as method parameters               |
-|   `BasePage`    |      Stored credentials — not its responsibility       |    SRP    |          Credentials moved to dedicated `TestConfig` class          |
+|       Class       |                             Problem                              | Principle |                              Solution                               |
+|:-----------------:|:----------------------------------------------------------------:|:---------:|:-------------------------------------------------------------------:|
+|  `DriverFactory`  |      Adding a new browser required modifying existing class      |    OCP    | Extracted browser creation into separate `BrowserDriver` subclasses |
+|    `InboxPage`    |       `fillEmailForm()` was hardcoded to `TestData` class        |    DIP    |               Data is now passed as method parameters               |
+| `AllureListener ` | Responsible for both handling test events and taking screenshots |    SRP    |     Screenshot logic moved to dedicated `ScreenshotUtils` class     |
 
 ## How to run
 
