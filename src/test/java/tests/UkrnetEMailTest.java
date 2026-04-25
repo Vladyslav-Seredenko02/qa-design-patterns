@@ -27,7 +27,7 @@ public class UkrnetEMailTest extends BaseTest {
     public void saveDraftTest() {
         log.info("=== Test started: saveDraftTest ===");
         inboxPage.createMessage();
-        inboxPage.fillEmailForm();
+        inboxPage.fillEmailForm(TestData.RECIPIENT, TestData.SUBJECT, TestData.BODY);
         inboxPage.switchToDrafts();
         Assert.assertTrue(draftPage.mailIsDisplayed(), "Mail isn`t displayed on the draft page");
         draftPage.openTheMail();
@@ -49,7 +49,7 @@ public class UkrnetEMailTest extends BaseTest {
     public void sendMailTest() {
         log.info("=== Test started: sendMailTest ===");
         inboxPage.createMessage();
-        inboxPage.fillEmailForm();
+        inboxPage.fillEmailForm(TestData.RECIPIENT, TestData.SUBJECT, TestData.BODY);
         inboxPage.switchToDrafts();
         draftPage.openTheMail();
 

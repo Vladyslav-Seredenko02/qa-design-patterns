@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import tests.TestData;
 
 
 public class InboxPage extends BasePage {
@@ -54,14 +53,14 @@ public class InboxPage extends BasePage {
         createMessageBtn.click();
     }
 
-    public void fillEmailForm() {
-        log.info("User fills email form — to: {}, subject: {}", TestData.RECIPIENT, TestData.SUBJECT);
-        enterText(addresseeField, TestData.RECIPIENT);
+    public void fillEmailForm(String recipient, String subject, String body) {
+        log.info("User fills email form — to: {}, subject: {}", recipient, subject);
+        enterText(addresseeField, recipient);
         addresseeField.sendKeys(Keys.ENTER);
-        enterText(topicField, TestData.SUBJECT);
+        enterText(topicField, subject);
 
         wait.until(ExpectedConditions.visibilityOf(emailBodyInputField)).click();
-        emailBodyInputField.sendKeys(TestData.BODY);
+        emailBodyInputField.sendKeys(body);
         log.info("User successfully filled the email form");
     }
 

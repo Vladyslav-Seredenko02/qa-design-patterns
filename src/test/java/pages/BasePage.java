@@ -1,23 +1,25 @@
 package pages;
 
+import decorators.LoggingWebDriverWait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.ConfigReader;
+import utils.TestConfig;
+
 import java.time.Duration;
 
 public abstract class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
-    protected final String URL = ConfigReader.get("base.url");
-    protected final String USERNAME = ConfigReader.get("username");
-    protected final String PASSWORD = ConfigReader.get("password");
+    protected final String URL = TestConfig.URL;
+    protected final String USERNAME = TestConfig.USERNAME;
+    protected final String PASSWORD = TestConfig.PASSWORD;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new LoggingWebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     protected void enterText(WebElement element, String text) {
