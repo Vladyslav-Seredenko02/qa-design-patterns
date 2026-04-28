@@ -8,9 +8,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import services.MailService;
 
 
-public class InboxPage extends BasePage {
+public class InboxPage extends BasePage implements MailService {
     private static final Logger log = LogManager.getLogger(InboxPage.class);
 
     public InboxPage(WebDriver driver) {

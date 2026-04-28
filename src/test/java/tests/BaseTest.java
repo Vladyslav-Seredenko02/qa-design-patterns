@@ -1,5 +1,6 @@
 package tests;
 
+import decorators.LoggingMailService;
 import drivers.DriverFactory;
 import pages.DraftPage;
 import pages.InboxPage;
@@ -8,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
+import services.MailService;
 
 public class BaseTest {
     private static final Logger log = LogManager.getLogger(BaseTest.class);
@@ -16,6 +18,7 @@ public class BaseTest {
     protected LoginPage loginPage;
     protected InboxPage inboxPage;
     protected DraftPage draftPage;
+    protected MailService mailService;
 
     @Parameters("browser")
     @BeforeMethod
@@ -26,6 +29,7 @@ public class BaseTest {
         loginPage = new LoginPage(driver);
         inboxPage = new InboxPage(driver);
         draftPage = new DraftPage(driver);
+        mailService = new LoggingMailService(inboxPage);
 
         loginPage.openPage();
         loginPage.enterUsername();

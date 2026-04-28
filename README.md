@@ -2,23 +2,23 @@
 
 ### Singleton
 
-'DriverFactory' ensures only one 'WebDriver' instance exists during the test run.
+`DriverFactory` ensures only one `WebDriver` instance exists during the test run.
 A private constructor prevents external instantiation.
 
 ### Factory Method
 
-Abstract class 'BrowserDriver' defines the 'createDriver()' method. And each browser has it`s own implementation:
-'ChromeBrowserDriver',
-'EdgeBrowserDriver',
-'FirefoxBrowserDriver'.
+Abstract class `BrowserDriver` defines the `createDriver()` method. And each browser has its own implementation:
+`ChromeBrowserDriver`,
+`EdgeBrowserDriver`,
+`FirefoxBrowserDriver`.
 
-And 'DriverFactory' class, in turn, delegates driver creation to these classes without knowing
-the details of each implementation
+And `DriverFactory` class, in turn, delegates driver creation to these classes without knowing
+the details of each implementation.
 
 ### Decorator
 
-'LoggingWebDriverWait' class extends 'WebDriverWait' class, and adds debug logging before and after each 'until()' call
-Applied in `BasePage` — automatically works across all Page Object classes.
+`MailService` interface is implemented by `InboxPage` (original) and `LoggingMailService` (decorator).
+`LoggingMailService` wraps the original `MailService` object and adds logging before delegating each call to the original implementation.
 
 ### S.O.L.I.D. Fixes
 
@@ -31,10 +31,10 @@ Applied in `BasePage` — automatically works across all Page Object classes.
 ## How to run
 
 Default run:
-'mvn clean test'
+`mvn clean test`
 
 With parameters:
-'mvn clean test -Dsuite=smoke -Dbrowser=firefox -Denv=qa2'
+`mvn clean test -Dsuite=smoke -Dbrowser=firefox -Denv=qa2`
 
 Available parameters:
 
@@ -45,4 +45,4 @@ Available parameters:
 |    env    |            qa1, qa2             |        qa1        |
 
 Allure Report:
-'mvn allure:serve'
+`mvn allure:serve`

@@ -26,9 +26,9 @@ public class UkrnetEMailTest extends BaseTest {
     @Description("User should be able to save email as draft")
     public void saveDraftTest() {
         log.info("=== Test started: saveDraftTest ===");
-        inboxPage.createMessage();
-        inboxPage.fillEmailForm(TestData.RECIPIENT, TestData.SUBJECT, TestData.BODY);
-        inboxPage.switchToDrafts();
+        mailService.createMessage();
+        mailService.fillEmailForm(TestData.RECIPIENT, TestData.SUBJECT, TestData.BODY);
+        mailService.switchToDrafts();
         Assert.assertTrue(draftPage.mailIsDisplayed(), "Mail isn`t displayed on the draft page");
         draftPage.openTheMail();
         Assert.assertEquals(draftPage.getAddresseeText(), TestData.RECIPIENT
@@ -48,15 +48,15 @@ public class UkrnetEMailTest extends BaseTest {
     @Description("User should be able to send email from drafts")
     public void sendMailTest() {
         log.info("=== Test started: sendMailTest ===");
-        inboxPage.createMessage();
-        inboxPage.fillEmailForm(TestData.RECIPIENT, TestData.SUBJECT, TestData.BODY);
-        inboxPage.switchToDrafts();
+        mailService.createMessage();
+        mailService.fillEmailForm(TestData.RECIPIENT, TestData.SUBJECT, TestData.BODY);
+        mailService.switchToDrafts();
         draftPage.openTheMail();
 
         draftPage.sendTheMail();
-        inboxPage.switchToDrafts();
+        mailService.switchToDrafts();
         Assert.assertTrue(draftPage.isDraftPageClear(), "Draft page still contains the mail");
-        inboxPage.switchToSents();
+        mailService.switchToSents();
         Assert.assertTrue(draftPage.mailIsDisplayed(), "Mail isn`t displayed on the sent page");
         log.info("=== sendMailTest passed successfully ===");
     }
