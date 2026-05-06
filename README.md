@@ -44,5 +44,6 @@ Available parameters:
 |  browser  |      chrome, firefox, edge      |  firefox, chrome  |
 |    env    |            qa1, qa2             |        qa1        |
 
+
 Allure Report:
 `mvn allure:serve`
